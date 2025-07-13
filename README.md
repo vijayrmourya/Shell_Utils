@@ -1,16 +1,25 @@
-# shell-automation
+# Shell Automation
 
-This repo contains some shell script based projects of mine, performing some of day to day admin tasks and automations
+A collection of Bash script projects designed to automate routine administration tasks and provide hands-on shell scripting exercises.
 
-# Project Wise details
+## Projects
 
-Refer `readme` of individual projects to know more details
+Each subfolder contains its own README with detailed instructions and examples.
 
-## 01_system_info_reporter
+### 01_system_info_reporter
 
-Get to know your system, provides system related details like current date and time, current user, OS details uptime  and kernel details etc.
+Generates a concise system report, including:
+- Current date and time  
+- Logged-in user  
+- Operating system and kernel details  
+- System uptime  
+- Hardware and resource metrics
 
-## shell-basics
+much more!
+  
+### Shell Basics
 
-Containes projects which are simple command executions and learning how each command works example monitoring system helth and reading system and hardware details etc
-
+A set of simple scripts that demonstrate fundamental shell commands, such as:
+- Monitoring CPU and memory usage  
+- Inspecting disks and USB devices  
+- Running basic network diagnostics  
