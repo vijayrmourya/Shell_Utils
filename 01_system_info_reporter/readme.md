@@ -1,15 +1,51 @@
-# Project 01 - Basic Syatem Info Reporter
+# Project 01: System Info Reporter
 
-Create a shell script that, when executed, gathers & displays essential information about the Linux system it's running on. The output should be clear, organized & easy to read giving quick system overview
+A Bash script that collects and displays essential Linux system information in a clear, organized format for a quick system overview.
 
-## Requirements:
+## Features
 
-1. Current date & time
-2. Current user
-3. System uptime
-4. Operating System Details
-5. Kernel Version
-6. CPU Information
-7. Memory Usage
-8. Disk Space Used
-9. Top Mem & CPU consuming processes
+* **Current date & time**
+* **Active user**
+* **System uptime**
+* **Operating System details**
+* **Kernel version**
+* **CPU information**
+* **Memory usage**
+* **Disk usage statistics**
+* **Top memory and CPU consuming processes**
+
+## Requirements
+
+* Linux operating system
+* Bash shell
+* Standard Unix utilities: `uname`, `date`, `whoami`, `uptime`, `grep`, `awk`, `top`, `df`, `free`
+
+## Installation
+
+1. **Clone the repository** (or navigate to the project folder if already cloned):
+
+   ```bash
+   git clone https://github.com/vijayrmourya/shell-automation.git
+   cd shell-automation/01_system_info_reporter
+   ```
+2. **Make the script executable**:
+
+   ```bash
+   chmod +x system_info_reporter.sh
+   ```
+
+## Usage
+
+Run the script to generate the system report:
+
+```bash
+source system_info_reporter.sh
+```
+
+## Contributing
+
+Contributions, issues, and feature requests are welcome! Please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the \[root repository]\([https://github.com/vijayrmourya/shell-](https://github.com/vijayrmourya/shell-)
