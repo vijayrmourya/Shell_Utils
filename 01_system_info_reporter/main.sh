@@ -57,3 +57,6 @@ ps -eo pid,user,pcpu,pmem,cmd --sort=-pcpu | head -n 6
 seperator_line
 echo "Top 5 Memory/RAM consuming processes"
 ps -eo pid,user,pcpu,pmem,cmd --sort=-pmem | head -n 6
+
+echo "Basic Syatem Info Report ends here! [${CURRENTDATE}]"
+echo ============================================
