@@ -45,7 +45,3 @@ source system_info_reporter.sh
 ## Contributing
 
 Contributions, issues, and feature requests are welcome! Please open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the \[root repository]\([https://github.com/vijayrmourya/shell-](https://github.com/vijayrmourya/shell-)
