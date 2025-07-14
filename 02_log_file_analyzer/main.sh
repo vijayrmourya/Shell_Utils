@@ -4,10 +4,9 @@ usage(){
     cat <<EOF
 Usage: $0 [-f <log file path>] 
 -f, --logfilepath               Path to log file (required)
--gl, --generatelogs             Generate log files
--glfc, --generatelogfilecount   Number of log files to create
--llc, --loglinescount           Number of logs entries to be created in logfile
 -h, --help                      Show help message
+-k, --keyword                   Keyword to search in logs
+-s, --showmatch                Show matched keyword log
 EOF
     return 1
 }
@@ -21,26 +20,23 @@ system_logger(){
     esac
 }
 
-gen_log(){
-    while [ $count -lt $1 ]; do
-        source log_generator.sh "$1" "$2"
-        count=$((count + 1))
-    done 
+seperator_line(){
+    echo "---------------------------------------------------------------------"
 }
 
-SHORT_OPTIONS="f:llc:h"
-LONG_OPTIONS="logfilepath:generatelogs:generatelogscount:loglinescount:help"
-PARSED=$(getopt --options=$SHORT_OPTIONS --longoptions=$LONG_OPTIONS --name "$0" -- "$@")
+SHORT_OPTIONS="f:k:hs"
+LONG_OPTIONS="logfilepath:,help,keyword:,showmatch"
+PARSED=$(getopt --options="$SHORT_OPTIONS" --longoptions="$LONG_OPTIONS" --name "$0" -- "$@")
 if [[ $? -ne 0 ]]; then
     usage
+    return 1
 fi
 
 eval set -- "$PARSED"
 
 LOGFILE_PATH=""
-GENERATE_LOGS=false
-GENERATE_LOGFILE_COUNT=1
-LOG_LINES_COUNT=500
+declare -a SEARCH_KEYWORDS=()
+SHOWMATCHED=false
 
 while true; do
     case "$1" in
@@ -48,20 +44,17 @@ while true; do
         LOGFILE_PATH="$2"
         shift 2
         ;;
-    -gl|--generatelogs)
-        GENERATE_LOGS="$2"
+    -k|--keyword)
+        SEARCH_KEYWORDS+=("$2")
         shift 2
         ;;
-    -glfc|--generatelogfilecount)
-        GENERATE_LOGFILE_COUNT="$2"
-        shift 2
-        ;;
-    -llc|--loglinescount)
-        LOG_LINES_COUNT="$2"
-        shift 2
+    -s|--showmatch)
+        SHOWMATCHED=true
+        shift
         ;;
     -h|--help)
         usage
+        return 0
         ;;
     --)
         shift
@@ -70,6 +63,7 @@ while true; do
     *)
         system_logger "ERROR" "Unrecognized option $1"
         usage
+        return 1
         ;;
     esac
 done
@@ -87,6 +81,21 @@ if [ ! -f "${LOGFILE_PATH}" ]; then
 fi
 
 system_logger "INFO" "Generated log summary"
-system_logger "INFO" "====================="
+seperator_line
 LINES_COUNT=$(wc -l ${LOGFILE_PATH})
 system_logger "INFO" "Number of Lines: ${LINES_COUNT}"
+seperator_line
+echo $SEARCH_KEYWORDS
+for word in "${SEARCH_KEYWORDS[@]}"; do
+    if [ $SHOWMATCHED == "true" ]; then
+        count=0
+        echo "Searching for keywork: $word"
+        count=$(grep -Fn "$word" "$LOGFILE_PATH")
+        echo "$count"
+    else
+        count=0
+        echo "Searching for keywork: $word"
+        count=$(grep -Fn "$word" "$LOGFILE_PATH" | wc -l)
+        echo "Found $word: $count times!"
+    fi
+done
