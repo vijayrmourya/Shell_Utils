@@ -99,3 +99,11 @@ for word in "${SEARCH_KEYWORDS[@]}"; do
         echo "Found $word: $count times!"
     fi
 done
+
+seperator_line
+system_logger "INFO" "Below are top 3 most recurring lines of logsfile"
+sort $LOGFILE_PATH | uniq -c | sort -nr | head -n 3
+
+seperator_line
+system_logger "INFO" "Below are top 3 most recurring words of logsfile"
+tr -c '["al:]' '[\n*]' < "$LOGFILE_PATH" | grep -v '^$' | sort | uniq -c | sort -nr | head -n 3
