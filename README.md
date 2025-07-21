@@ -35,7 +35,7 @@ Below is the high-level overview; see each folder’s README for in-depth docs.
    ```bash
    git clone https://github.com/vijayrmourya/Shell_Utils.git
    cd Shell_Utils
-````
+   ```
 
 2. **Make scripts executable**
 
